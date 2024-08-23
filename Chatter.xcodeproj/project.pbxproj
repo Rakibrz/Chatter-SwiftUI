@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		496FD3C02C78618E008C1264 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496FD3BF2C78618E008C1264 /* AppButton.swift */; };
+		49C7302A2C78ACCC0095EB75 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C730292C78ACCC0095EB75 /* LoginViewModel.swift */; };
+		49C7302C2C78B9F00095EB75 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7302B2C78B9F00095EB75 /* NavigationRouter.swift */; };
+		49C7302E2C78C27E0095EB75 /* TabbarScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7302D2C78C27E0095EB75 /* TabbarScreenView.swift */; };
+		49C730302C78C8D80095EB75 /* ProgressLoaderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7302F2C78C8D80095EB75 /* ProgressLoaderModifier.swift */; };
+		49C730322C78C8F90095EB75 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C730312C78C8F90095EB75 /* LoaderView.swift */; };
+		49C730362C78D0720095EB75 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C730352C78D0720095EB75 /* ProfileScreenView.swift */; };
+		49C730392C78D1E80095EB75 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C730382C78D1E80095EB75 /* UserProfile.swift */; };
 		49E3CB402C776D220074A26D /* ChatterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3CB3F2C776D220074A26D /* ChatterApp.swift */; };
 		49E3CB462C776D230074A26D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E3CB452C776D230074A26D /* Assets.xcassets */; };
 		49E3CB4A2C776D230074A26D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E3CB492C776D230074A26D /* Preview Assets.xcassets */; };
@@ -38,6 +45,13 @@
 
 /* Begin PBXFileReference section */
 		496FD3BF2C78618E008C1264 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
+		49C730292C78ACCC0095EB75 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		49C7302B2C78B9F00095EB75 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
+		49C7302D2C78C27E0095EB75 /* TabbarScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarScreenView.swift; sourceTree = "<group>"; };
+		49C7302F2C78C8D80095EB75 /* ProgressLoaderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLoaderModifier.swift; sourceTree = "<group>"; };
+		49C730312C78C8F90095EB75 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		49C730352C78D0720095EB75 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
+		49C730382C78D1E80095EB75 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		49E3CB3C2C776D220074A26D /* Chatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E3CB3F2C776D220074A26D /* ChatterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatterApp.swift; sourceTree = "<group>"; };
 		49E3CB452C776D230074A26D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,6 +94,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49C730282C78ACC20095EB75 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				49E3CB622C7787340074A26D /* LoginScreenView.swift */,
+				49C730342C78CA2D0095EB75 /* ViewModel */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		49C730332C78C96C0095EB75 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				49C7302F2C78C8D80095EB75 /* ProgressLoaderModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		49C730342C78CA2D0095EB75 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				49C730292C78ACCC0095EB75 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		49C730372C78D1DA0095EB75 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				49C730352C78D0720095EB75 /* ProfileScreenView.swift */,
+				49C730382C78D1E80095EB75 /* UserProfile.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		49E3CB332C776D220074A26D = {
 			isa = PBXGroup;
 			children = (
@@ -101,9 +149,12 @@
 			children = (
 				49E3CB5C2C7773480074A26D /* AppDelegate.swift */,
 				49E3CB3F2C776D220074A26D /* ChatterApp.swift */,
-				49E3CB622C7787340074A26D /* LoginScreenView.swift */,
+				49C7302D2C78C27E0095EB75 /* TabbarScreenView.swift */,
+				49C730372C78D1DA0095EB75 /* Profile */,
+				49C730282C78ACC20095EB75 /* Login */,
 				49E3CB9C2C7794570074A26D /* UI Helpers */,
 				49E3CB9D2C77946D0074A26D /* Utilities */,
+				49C730332C78C96C0095EB75 /* Modifiers */,
 				49E3CB6A2C778B230074A26D /* Extensions */,
 				49E3CB982C778E520074A26D /* Fonts */,
 				49E3CB452C776D230074A26D /* Assets.xcassets */,
@@ -162,6 +213,7 @@
 				49E3CB9E2C7799410074A26D /* OTPTextFieldView.swift */,
 				49E3CB6D2C778D290074A26D /* AppTextField.swift */,
 				496FD3BF2C78618E008C1264 /* AppButton.swift */,
+				49C730312C78C8F90095EB75 /* LoaderView.swift */,
 			);
 			path = "UI Helpers";
 			sourceTree = "<group>";
@@ -170,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				49E3CB662C778AF60074A26D /* PreferenceKeys.swift */,
+				49C7302B2C78B9F00095EB75 /* NavigationRouter.swift */,
 				49E3CB6B2C778B7F0074A26D /* AppSettingsManager.swift */,
 				49E3CB642C7787E00074A26D /* Constants.swift */,
 			);
@@ -265,13 +318,20 @@
 			files = (
 				49E3CB632C7787340074A26D /* LoginScreenView.swift in Sources */,
 				49E3CB512C776DA40074A26D /* CircularProfileImageView.swift in Sources */,
+				49C730392C78D1E80095EB75 /* UserProfile.swift in Sources */,
+				49C7302C2C78B9F00095EB75 /* NavigationRouter.swift in Sources */,
 				49E3CB702C778DE10074A26D /* Font+Extension.swift in Sources */,
 				49E3CB692C778B1F0074A26D /* View+Extension.swift in Sources */,
 				49E3CB5D2C7773480074A26D /* AppDelegate.swift in Sources */,
 				496FD3C02C78618E008C1264 /* AppButton.swift in Sources */,
+				49C730322C78C8F90095EB75 /* LoaderView.swift in Sources */,
 				49E3CB672C778AF60074A26D /* PreferenceKeys.swift in Sources */,
+				49C730302C78C8D80095EB75 /* ProgressLoaderModifier.swift in Sources */,
 				49E3CB612C777A1E0074A26D /* String+Extension.swift in Sources */,
+				49C7302A2C78ACCC0095EB75 /* LoginViewModel.swift in Sources */,
+				49C7302E2C78C27E0095EB75 /* TabbarScreenView.swift in Sources */,
 				49E3CB9B2C778FDF0074A26D /* Color+Extension.swift in Sources */,
+				49C730362C78D0720095EB75 /* ProfileScreenView.swift in Sources */,
 				49E3CB402C776D220074A26D /* ChatterApp.swift in Sources */,
 				49E3CB6C2C778B7F0074A26D /* AppSettingsManager.swift in Sources */,
 				49E3CB9F2C7799410074A26D /* OTPTextFieldView.swift in Sources */,
@@ -426,7 +486,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rz.Chatter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rz.chatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -466,7 +526,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rz.Chatter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rz.chatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

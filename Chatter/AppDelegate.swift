@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseAuth
 
 class AppDelegate: NSObject, UIApplicationDelegate {
 	
@@ -16,6 +17,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 		application.applicationIconBadgeNumber = 0
 		return sceneConfig
 	}
+	
+	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+		Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
+	}
+	
+	func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+		completionHandler(.noData)
+		return
+	}
+	
+	func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+		return Auth.auth().canHandle(url)
+	}
+	
 }
 
 /// Notifications should be handled from Scene Delegate only.

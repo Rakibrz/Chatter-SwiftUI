@@ -41,7 +41,10 @@ struct OTPTextFieldView: View {
 		}
 		.onChange(of: digitList) { newValue in
 			withAnimation {
-				guard let index = newValue.firstIndex(where: { $0.isNotEmpty == false }) else { return }
+				guard let index = newValue.firstIndex(where: { $0.isNotEmpty == false }) else {
+					otpText = digitList.joined()
+					return
+				}
 				if index <= otpText.count {
 					focus = index - 1
 				} else {

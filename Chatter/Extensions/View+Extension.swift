@@ -18,6 +18,16 @@ extension View {
 		.clipShape(RoundedRectangle(cornerRadius: radius))
 	}
 
+	/// Show Progress Loader animation
+	func showLoader(when active: Bool) -> some View {
+		modifier(ProgressLoaderModifier(active: active))
+	}
+
+	/// Show alert on the screen with dynamic action buttons
+	func showAlert<Actions: View>(title: String = "Alert", message: String, when isPresented: Binding<Bool>, @ViewBuilder actions: @escaping () -> Actions) -> some View {
+		alert(title, isPresented: isPresented, actions: actions) { Text(message).font(.appFont(size: .medium)) }
+	}
+	
 	/// Get safe area Insets of the device
 	func getSafeArea() -> UIEdgeInsets {
 		let safeArea = UIDevice.current.safeArea

@@ -15,4 +15,28 @@ extension String {
 
 extension Optional where Wrapped == String {
 	var isNotEmpty: Bool { self?.trimmed.isEmpty == false }
+	
+	func numberOnly() -> Self {
+		return self?.numberOnly()
+	}
+}
+
+extension RangeReplaceableCollection where Self: StringProtocol {
+	func numberOnly() -> Self {
+		return filter(\.isNumber)
+	}
+}
+
+extension Hashable {
+	var hasableTitle: String {
+		let name = String(describing: self)
+		return (name.components(separatedBy: "(").first ?? name).replacingOccurrences(of: "_", with: " ").capitalized
+	}
+}
+
+extension RawRepresentable {
+	var title: String {
+		let name = String(describing: self)
+		return (name.components(separatedBy: "(").first ?? name).replacingOccurrences(of: "_", with: " ").capitalized
+	}
 }

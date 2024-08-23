@@ -8,42 +8,63 @@
 import SwiftUI
 
 struct LoginScreenView: View {
-	@State private var phoneNumber: String = String()
-	@State private var otpSent: Bool = false
-	@State private var otpText: String = String()
+	
+	@StateObject private var viewModel: LoginViewModel = LoginViewModel()
+	@AppStorage(StorageKey.appState.title) private var appState: AppState?
+
     var body: some View {
 		VStack(spacing: AppPadding.regular) {
 			VStack(spacing: AppPadding.regular) {
-				AppTextField(title: "Phone number", text: $phoneNumber, textContentType: .telephoneNumber, keyboardType: .numberPad)
-					.onChange(of: phoneNumber) { newValue in
-						phoneNumber = String(newValue.prefix(10))
+				AppTextField(title: "Phone number", text: $viewModel.phoneNumber, textContentType: .telephoneNumber, keyboardType: .numberPad)
+					.onChange(of: viewModel.phoneNumber) { newValue in
+						viewModel.phoneNumber = String(newValue.prefix(10))
+						withAnimation {
+							viewModel.otpSent = false
+						}
 					}
 					.safeAreaInset(edge: .bottom, alignment: .leading) {
-						if otpSent {
+						if viewModel.otpSent {
 							Text("✓ OTP has been sent to your number.")
 							.foregroundStyle(Color.theme.green)
 							.font(.appFont(size: .small))
 						}
 					}
 				
-				if otpSent {
-					OTPTextFieldView(otpText: $otpText)
+				if viewModel.otpSent {
+					OTPTextFieldView(otpText: $viewModel.otpText)
 				}
 			}
 			.padding(AppPadding.large)
 			.safeAreaInset(edge: .bottom) {
-				AppButton(title: "Send OTP") {
-					withAnimation {
-						otpSent.toggle()
+				if viewModel.otpSent == false {
+					AppButton(title: "Send OTP") {
+						Task {
+							let response = await viewModel.sendOTP()
+							withAnimation {
+								viewModel.otpSent = response
+							}
+						}
 					}
+					.padding(AppPadding.large)
+				} else {
+					AppButton(title: "Verify OTP") {
+						Task {
+							let response = await viewModel.verifyOTP()
+							if response != nil {
+								await MainActor.run {
+									appState = .dashboard
+								}
+							}
+						}
+					}
+					.padding(AppPadding.large)
 				}
-				.padding(AppPadding.large)
+
 			}
 			.background(Color.primary.colorInvert())
 			.clipShape(RoundedRectangle(cornerRadius: Constants.radius * 3))
 			.environment(\.colorScheme, .dark)
 			.padding(AppPadding.large)
-//			.frame(maxHeight: .infinity, alignment: .bottom)
 		}
 		.ignoresSafeArea()
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -59,6 +80,10 @@ struct LoginScreenView: View {
 			Text("Login")
 				.foregroundStyle(Color.theme.lightOrange)
 				.font(.appFont(size: .custom(value: 35)).weight(.black))
+		}
+		.showLoader(when: viewModel.loading)
+		.showAlert(message: viewModel.errorMessage, when: $viewModel.showError) {
+			Button("OK") { }
 		}
     }
 }

@@ -24,3 +24,7 @@ enum AppPadding {
 	/// Value: 24
 	static let large: CGFloat = 24
 }
+
+enum StorageKey: String {
+	case appState
+}
