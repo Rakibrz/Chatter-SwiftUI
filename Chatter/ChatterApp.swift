@@ -6,27 +6,35 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @main
 struct ChatterApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+	@UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+			GeometryReader { proxy in
+				RootScreenView()
+					.onAppear {
+						AppSettingsManager.shared.screenSize = proxy.size
+					}
+			}
         }
-        .modelContainer(sharedModelContainer)
     }
+}
+
+struct RootScreenView: View {
+	@Environment(\.scenePhase) private var scenePhase
+	
+	var body: some View {
+		LoginScreenView()
+//		CircularProfileImageView(urlString: String())
+			.applyDefaults() /// - Note: default tint for buttons, Textfields
+			.onChange(of: scenePhase) { newPhase in
+				print("Previous Phase: \(AppSettingsManager.shared.scenePhase)")
+				AppSettingsManager.shared.scenePhase = newPhase
+				print("New Phase: \(AppSettingsManager.shared.scenePhase)")
+			}
+
+	}
 }
