@@ -10,8 +10,8 @@ import SwiftUI
 struct AppTextField: View {
 	let title: String
 	@Binding var text: String
-	var isSecure = false
 	
+	var isSecure: Bool = false
 	var highlight: Bool = false
 	var highlightColor: Color = Color.theme.orange
 	
@@ -21,7 +21,7 @@ struct AppTextField: View {
 	var trailingIcon: Image? = Image(systemName: "xmark")
 	var shallFocus: Bool = false
 	var animate: Bool = true
-	var onTrailingTap: (() -> Void)? = nil
+	var onTrailingTap: VoidCallback? = nil
 	
 	@FocusState private var isFocused: Bool
 	

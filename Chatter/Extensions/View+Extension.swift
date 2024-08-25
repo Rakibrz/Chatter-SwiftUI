@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 extension View {
 	
@@ -17,12 +18,17 @@ extension View {
 		}
 		.clipShape(RoundedRectangle(cornerRadius: radius))
 	}
-
+	
+	/// apply to call only once
+	func onFirstAppear(_ action: @escaping VoidCallback) -> some View {
+		modifier(FirstAppearModifier(action: action))
+	}
+	
 	/// Show Progress Loader animation
 	func showLoader(when active: Bool) -> some View {
 		modifier(ProgressLoaderModifier(active: active))
 	}
-
+	
 	/// Show alert on the screen with dynamic action buttons
 	func showAlert<Actions: View>(title: String = "Alert", message: String, when isPresented: Binding<Bool>, @ViewBuilder actions: @escaping () -> Actions) -> some View {
 		alert(title, isPresented: isPresented, actions: actions) { Text(message).font(.appFont(size: .medium)) }
@@ -33,12 +39,12 @@ extension View {
 		let safeArea = UIDevice.current.safeArea
 		return safeArea
 	}
-
+	
 	/// Hide view with condition
 	func hide(when hide: Bool) -> some View {
 		hide ? AnyView(hidden()) : AnyView(self)
 	}
-
+	
 	/// Read the size of the specific view
 	func readSize(onChange: @escaping ValueCallback<CGSize>) -> some View {
 		background(
@@ -63,20 +69,86 @@ extension View {
 	
 	func applyDefaults() -> some View {
 		tint(Color.accentColor)
-	}
-
-}
-
-extension UIDevice {
-	var hasNotch: Bool {
-		let bottom = safeArea.bottom
-		return bottom.isZero == false
+			.hideDefaultNavigation()
+			.environment(\.font, Font.custom("Barlow-Medium", size: 16))
 	}
 	
-	var safeArea: UIEdgeInsets {
-		guard let screen = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }) as? UIWindowScene else { return .zero }
-		guard let safeArea = screen.windows.first?.safeAreaInsets else { return .zero }
-		return safeArea
+	/// Dismiss active keyboard from screen
+	func dismissKeyboardOnTap(handler: VoidCallback? = nil) -> some View {
+		onTapGesture {
+			handler?()
+			UIApplication.shared.endEditing()
+		}
 	}
+	
 }
 
+// MARK: - Navigation bar
+extension View {
+	func appBar<Leading, Trailing>(title: String, leading: () -> Leading = { EmptyView() }, trailing: () -> Trailing = { EmptyView() }) -> some View where Leading: View, Trailing: View {
+		hideDefaultNavigation()
+			.safeAreaInset(edge: .top, spacing: AppPadding.small) {
+				if title.isNotEmpty {
+					Text(title)
+						.font(.appFont(size: .custom(value: 34)).weight(.bold))
+						.foregroundStyle(Color.theme.lightOrange)
+						.frame(maxWidth: .infinity)
+						.overlay(alignment: .leading) {
+							if leading() is EmptyView == false {
+								leading()
+							}
+						}
+						.overlay(alignment: .trailing) {
+							if trailing() is EmptyView == false {
+								trailing()
+							}
+						}
+						.padding(.horizontal)
+				}
+			}
+		
+	}
+	
+	func appNavigationBar<Leading, Trailing>(title: String,
+											 leading: Leading? = Image(systemName: "chevron.backward").foregroundStyle(Color.appOrangeLight),
+											 onLeadingTap: VoidCallback? = nil,
+											 trailing: () -> Trailing? = { EmptyView() }) -> some View where Leading: View, Trailing: View {
+		hideDefaultNavigation()
+			.toolbar {
+				if let leading, let onLeadingTap {
+					ToolbarItem(placement: .topBarLeading) {
+						Button(action: onLeadingTap, label: {
+							leading
+							
+						})
+					}
+				}
+				if title.isNotEmpty {
+					ToolbarItem(placement: .principal) {
+						Text(title)
+							.foregroundStyle(Color.theme.lightOrange)
+							.font(.appFont(size: .custom(value: 34)).weight(.bold))
+					}
+				}
+				if (trailing() is EmptyView) == false {
+					ToolbarItem(placement: .topBarTrailing) {
+						trailing()
+					}
+				}
+				
+			}
+			.toolbarBackground(.visible, for: .navigationBar)
+			.toolbar(.visible, for: .navigationBar)
+			.toolbarRole(.navigationStack)
+	}
+	
+	func hideDefaultNavigation() -> some View {
+		navigationBarTitleDisplayMode(.inline)
+		//			.navigationTitle
+			.navigationBarBackButtonHidden()
+			.toolbarBackground(.hidden, for: .navigationBar)
+		
+	}
+	
+	
+}

@@ -11,8 +11,8 @@ struct LoginScreenView: View {
 	
 	@StateObject private var viewModel: LoginViewModel = LoginViewModel()
 	@AppStorage(StorageKey.appState.title) private var appState: AppState?
-
-    var body: some View {
+	
+	var body: some View {
 		VStack(spacing: AppPadding.regular) {
 			VStack(spacing: AppPadding.regular) {
 				AppTextField(title: "Phone number", text: $viewModel.phoneNumber, textContentType: .telephoneNumber, keyboardType: .numberPad)
@@ -25,8 +25,8 @@ struct LoginScreenView: View {
 					.safeAreaInset(edge: .bottom, alignment: .leading) {
 						if viewModel.otpSent {
 							Text("✓ OTP has been sent to your number.")
-							.foregroundStyle(Color.theme.green)
-							.font(.appFont(size: .small))
+								.foregroundStyle(Color.theme.green)
+								.font(.appFont(size: .small))
 						}
 					}
 				
@@ -50,23 +50,23 @@ struct LoginScreenView: View {
 					AppButton(title: "Verify OTP") {
 						Task {
 							let response = await viewModel.verifyOTP()
-							if response != nil {
+							if let response {
+								let inCompleteProfile = response.displayName?.isEmpty ?? true
 								await MainActor.run {
-									appState = .dashboard
+									appState = inCompleteProfile ? .setupProfile : .dashboard
 								}
 							}
 						}
 					}
 					.padding(AppPadding.large)
 				}
-
+				
 			}
 			.background(Color.primary.colorInvert())
 			.clipShape(RoundedRectangle(cornerRadius: Constants.radius * 3))
 			.environment(\.colorScheme, .dark)
 			.padding(AppPadding.large)
 		}
-		.ignoresSafeArea()
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background {
 			Ellipse()
@@ -76,18 +76,15 @@ struct LoginScreenView: View {
 				.offset(y: -AppSettingsManager.shared.screenSize.width)
 		}
 		.background(Color.theme.lightOrange)
-		.safeAreaInset(edge: .top) {
-			Text("Login")
-				.foregroundStyle(Color.theme.lightOrange)
-				.font(.appFont(size: .custom(value: 35)).weight(.black))
-		}
+		.ignoresSafeArea()
+		.appBar(title: "Login")
+		.ignoresSafeArea(.keyboard, edges: .bottom)
 		.showLoader(when: viewModel.loading)
 		.showAlert(message: viewModel.errorMessage, when: $viewModel.showError) {
 			Button("OK") { }
 		}
-    }
+	}
 }
-
 #Preview {
 	LoginScreenView()
 		.applyDefaults()

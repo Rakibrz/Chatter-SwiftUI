@@ -11,22 +11,24 @@ enum AppState: String {
 	case unknown
 	case authentication
 	case dashboard
+	case setupProfile
 	case logout
 }
 
 enum AppRoutes: Hashable {
 	case authentication
 	case dashboard
-	case inbox
-	case profile
+	case profile(isFromLogin: Bool)
 	
 	@ViewBuilder
 	func view() -> some View {
 		switch self {
 		case .authentication:
 			LoginScreenView()
-		default:
-			Text(self.hasableTitle)
+		case .dashboard:
+			TabbarScreenView()
+		case .profile(let isFromLogin):
+			ProfileScreenView(isFromLogin: isFromLogin)
 		}
 	}
 }
@@ -39,11 +41,11 @@ class PageRouter<Generic: Hashable>: ObservableObject {
 		}
 	}
 	
-	func push(to route: Generic) {
+	func push(to route: Generic...) {
 		Task(priority: .userInitiated) {
 			await MainActor.run {
 				withAnimation {
-					paths.append(route)
+					paths.append(contentsOf: route)
 				}
 			}
 		}
@@ -71,16 +73,16 @@ class PageRouter<Generic: Hashable>: ObservableObject {
 		}
 	}
 	
-	func popToRoot(with route: Generic) {
+	func popToRoot(with route: Generic...) {
 		Task(priority: .userInitiated) {
 			await MainActor.run {
 				withAnimation {
-					paths = [route]
+					paths = route
 				}
 			}
 		}
 	}
-
+	
 	func reset() {
 		Task(priority: .userInitiated) {
 			await MainActor.run {

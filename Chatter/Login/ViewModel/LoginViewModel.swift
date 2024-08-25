@@ -15,28 +15,41 @@ protocol ViewModelProtocol: ObservableObject {
 }
 
 class LoginViewModel: ViewModelProtocol {
-
-	static var user: User? = Auth.auth().currentUser
 	
 	@Published var phoneNumber: String = String()
 	@Published var verificationId: String = String()
 	@Published var otpText: String = String()
 	@Published var otpSent: Bool = false
-
+	
 	@Published var loading: Bool = false
 	@Published var showError: Bool = false
 	@Published var errorMessage: String = String() {
 		didSet {
 			if errorMessage.isNotEmpty {
+				print("Error: => \(errorMessage)")
 				showError = true
 			}
 		}
 	}
-
+	
 }
 
 @MainActor
 extension LoginViewModel {
+	
+	static func retriveUser() async {
+		do {
+			try await Auth.auth().currentUser?.reload()
+		} catch { 
+			var nsError: NSError = error as NSError
+			if nsError.code == AuthErrorCode.userNotFound.rawValue
+				|| nsError.code == AuthErrorCode.userTokenExpired.rawValue {
+				ProfileViewModel.logout()
+			}
+			print("\(#function) error: \(error.localizedDescription)")
+		}
+	}
+	
 	func sendOTP() async -> Bool {
 		guard phoneNumber.count == 10 else {
 			errorMessage = "Please enter valid mobile number"
@@ -54,7 +67,7 @@ extension LoginViewModel {
 			errorMessage = error.localizedDescription
 			otpSent = false
 		}
-
+		
 		return otpSent
 	}
 	

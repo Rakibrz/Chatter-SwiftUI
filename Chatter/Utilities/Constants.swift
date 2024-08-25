@@ -8,10 +8,14 @@
 import Foundation
 
 typealias ValueCallback<Type: Any> = (Type) -> Void
+typealias VoidCallback = () -> Void
 
 enum Constants {
 	/// 4px
 	static let radius: CGFloat = 4
+	
+	static let randomImageUrl: String = "https://picsum.photos/" // https://picsum.photos/512
+	static let avatarUrl: String = "https://ui-avatars.com/api"
 }
 
 enum AppPadding {

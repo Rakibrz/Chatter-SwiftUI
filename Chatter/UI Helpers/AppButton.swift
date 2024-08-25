@@ -10,7 +10,7 @@ import SwiftUI
 struct AppButton: View {
 	let title: String
 	var disabled: Bool = false
-	let onTap: () -> Void
+	let onTap: VoidCallback
 	
     var body: some View {
 		Button {
