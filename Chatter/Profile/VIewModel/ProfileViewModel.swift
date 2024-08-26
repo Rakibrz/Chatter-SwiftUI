@@ -18,6 +18,7 @@ class ProfileViewModel: ViewModelProtocol {
 	@Published var errorMessage: String = String() {
 		didSet {
 			if errorMessage.isNotEmpty {
+				print("Error: => \(errorMessage)")
 				showError = true
 			}
 		}
@@ -37,7 +38,8 @@ extension ProfileViewModel {
 		defer { loading = false }
 		loading = true
 		do {
-			if let userId = user.id, let response = try await firestore.fetchProfile(by: userId) {
+			if let userId = user.id, userId.isNotEmpty {
+				let response = try await firestore.fetchProfile(by: userId)
 				user = response
 			}
 		} catch {

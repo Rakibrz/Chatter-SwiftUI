@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct UserProfile: Codable {
+struct UserProfile: Codable, Identifiable, Hashable {
 	@DocumentID var id: String?
 	var phoneNumber, name: String
 	var date: Date = .now
@@ -17,7 +17,7 @@ struct UserProfile: Codable {
 		guard name.isNotEmpty else { return name }
 		let nameList = name.capitalized.components(separatedBy: .whitespacesAndNewlines).prefix(2)
 		let initials = nameList.joined(separator: "+")
-		var components = String("?name=\(initials)&length=\(nameList.count)&rounded=\(rounded)")
+		var components = String("?name=\(initials)&length=\(nameList.count)&rounded=\(rounded)&color=ffffff")
 
 		if let firstCharacter = name.first {
 			let background = pickColor(alphabet: firstCharacter).replacingOccurrences(of: "#", with: "")

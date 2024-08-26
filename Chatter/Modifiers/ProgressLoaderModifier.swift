@@ -16,8 +16,7 @@ struct ProgressLoaderModifier: ViewModifier {
 			.disabled(active)
 			.overlay {
 				if active {
-					LoaderView(thickness: 3)
-						.frame(width: AppPadding.medium*2, height: AppPadding.medium*2)
+					LoaderView(thickness: 2)
 				}
 			}
 	}

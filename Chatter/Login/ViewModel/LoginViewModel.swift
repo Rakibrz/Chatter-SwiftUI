@@ -10,8 +10,8 @@ import FirebaseAuth
 
 protocol ViewModelProtocol: ObservableObject {
 	var loading: Bool { get }
-	var errorMessage: String { get }
 	var showError: Bool { get }
+	var errorMessage: String { get }
 }
 
 class LoginViewModel: ViewModelProtocol {
@@ -31,7 +31,7 @@ class LoginViewModel: ViewModelProtocol {
 			}
 		}
 	}
-	
+
 }
 
 @MainActor
@@ -41,9 +41,9 @@ extension LoginViewModel {
 		do {
 			try await Auth.auth().currentUser?.reload()
 		} catch { 
-			var nsError: NSError = error as NSError
-			if nsError.code == AuthErrorCode.userNotFound.rawValue
-				|| nsError.code == AuthErrorCode.userTokenExpired.rawValue {
+			let errorCode: Int = (error as NSError).code
+			if errorCode == AuthErrorCode.userNotFound.rawValue
+				|| errorCode == AuthErrorCode.userTokenExpired.rawValue {
 				ProfileViewModel.logout()
 			}
 			print("\(#function) error: \(error.localizedDescription)")

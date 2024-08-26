@@ -9,10 +9,15 @@ import SwiftUI
 
 struct ChatsScreenView: View {
 	var body: some View {
-		Text("Chats")
+		List {
+			
+		}
+		.listStyle(.plain)
+		.appBar(title: "Chats", tintColor: Color.theme.orange)
 	}
 }
 
 #Preview {
 	ChatsScreenView()
+		.applyDefaults()
 }

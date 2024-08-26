@@ -85,26 +85,29 @@ extension View {
 
 // MARK: - Navigation bar
 extension View {
-	func appBar<Leading, Trailing>(title: String, leading: () -> Leading = { EmptyView() }, trailing: () -> Trailing = { EmptyView() }) -> some View where Leading: View, Trailing: View {
+	func appBar<Leading, Trailing>(title: String, tintColor: Color = Color.theme.lightOrange, leading: () -> Leading = { EmptyView() }, trailing: () -> Trailing = { EmptyView() }) -> some View where Leading: View, Trailing: View {
 		hideDefaultNavigation()
 			.safeAreaInset(edge: .top, spacing: AppPadding.small) {
-				if title.isNotEmpty {
-					Text(title)
-						.font(.appFont(size: .custom(value: 34)).weight(.bold))
-						.foregroundStyle(Color.theme.lightOrange)
-						.frame(maxWidth: .infinity)
-						.overlay(alignment: .leading) {
-							if leading() is EmptyView == false {
-								leading()
-							}
-						}
-						.overlay(alignment: .trailing) {
-							if trailing() is EmptyView == false {
-								trailing()
-							}
-						}
-						.padding(.horizontal)
+				HStack(spacing: AppPadding.small) {
+					if title.isNotEmpty {
+						Text(title)
+							.font(.appFont(size: .custom(value: 34)).weight(.bold))
+							.frame(maxWidth: .infinity)
+					}
 				}
+				.frame(maxWidth: .infinity)
+				.overlay(alignment: .leading) {
+					if leading() is EmptyView == false {
+						leading()
+					}
+				}
+				.overlay(alignment: .trailing) {
+					if trailing() is EmptyView == false {
+						trailing()
+					}
+				}
+				.padding(.horizontal)
+				.foregroundStyle(tintColor)
 			}
 		
 	}

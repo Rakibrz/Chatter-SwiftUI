@@ -10,6 +10,7 @@ import SwiftUI
 struct AppButton: View {
 	let title: String
 	var disabled: Bool = false
+	var borderOnly: Bool = false
 	let onTap: VoidCallback
 	
     var body: some View {
@@ -21,10 +22,10 @@ struct AppButton: View {
 				.frame(maxWidth: .infinity)
 				.padding(.vertical)
 		}
-		.foregroundStyle(disabled ? Color.theme.lightGrey : Color.white)
-		.background(disabled ? Color.theme.lightOrange : Color.theme.orange)
-		.clipShape(.rect(cornerRadius: Constants.radius))
+		.buttonStyle(.borderedProminent)
+		.buttonBorderShape(.roundedRectangle(radius: Constants.radius))
 		.disabled(disabled)
+		.tint(Color.accentColor)
     }
 }
 

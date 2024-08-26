@@ -27,7 +27,23 @@ class FirestoreUserDatabase: FirestoreProtocol {
 }
 
 extension FirestoreUserDatabase {
-	func fetchProfile(by userId: String) async throws -> UserProfile? {
+	func fetchUsers() async throws -> [UserProfile] {
+		var collection = database.collection(collection.rawValue)
+		var query = collection.order(by: "name")
+		if let userId = FirestoreUserDatabase.user?.uid {
+			query = collection.whereField(FieldPath.documentID(), isNotEqualTo: userId).order(by: "name")
+		}
+		
+		let querySnapshot = try await query.getDocuments()
+		let response = try querySnapshot.documents.compactMap { snapshot in
+			try snapshot.data(as: UserProfile.self)
+		}
+		return response
+	}
+}
+
+extension FirestoreUserDatabase {
+	func fetchProfile(by userId: String) async throws -> UserProfile {
 		let reference = documentReference(user: userId)
 		return try await reference.getDocument(as: UserProfile.self)
 	}
