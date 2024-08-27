@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490D04AF2C7E4BBE006E2061 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490D04AE2C7E4BBE006E2061 /* Date+Extension.swift */; };
 		496FD3C02C78618E008C1264 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496FD3BF2C78618E008C1264 /* AppButton.swift */; };
 		4977D19F2C7C74780075F242 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4977D19E2C7C74780075F242 /* HomeViewModel.swift */; };
 		497FC8C32C79FEF500404817 /* FireStoreCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FC8C22C79FEF500404817 /* FireStoreCollections.swift */; };
 		497FC8C62C79FF3A00404817 /* FirestoreDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FC8C52C79FF3A00404817 /* FirestoreDatabase.swift */; };
+		499147782C7C95290055C3ED /* ConversionsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499147772C7C95290055C3ED /* ConversionsScreenView.swift */; };
+		4991477A2C7C953B0055C3ED /* ConversionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499147792C7C953B0055C3ED /* ConversionViewModel.swift */; };
+		4991477C2C7C95440055C3ED /* ChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991477B2C7C95440055C3ED /* ChatsViewModel.swift */; };
+		4991477F2C7C970E0055C3ED /* FirestoreChatDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991477E2C7C970E0055C3ED /* FirestoreChatDatabase.swift */; };
+		499147812C7C97580055C3ED /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499147802C7C97580055C3ED /* Chat.swift */; };
+		499147832C7C997D0055C3ED /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499147822C7C997D0055C3ED /* ChatMessage.swift */; };
+		499147872C7C9EA50055C3ED /* FirestoreMessagesDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499147862C7C9EA50055C3ED /* FirestoreMessagesDatabase.swift */; };
+		4991478B2C7CB8EC0055C3ED /* TextMessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991478A2C7CB8EC0055C3ED /* TextMessageRowView.swift */; };
+		4991478D2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991478C2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift */; };
 		49AF20FF2C7A33A500C9F52A /* FirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AF20FE2C7A33A500C9F52A /* FirstAppearModifier.swift */; };
 		49C7302A2C78ACCC0095EB75 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C730292C78ACCC0095EB75 /* LoginViewModel.swift */; };
 		49C7302C2C78B9F00095EB75 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7302B2C78B9F00095EB75 /* NavigationRouter.swift */; };
@@ -54,10 +64,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		490D04AE2C7E4BBE006E2061 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		496FD3BF2C78618E008C1264 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		4977D19E2C7C74780075F242 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		497FC8C22C79FEF500404817 /* FireStoreCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreCollections.swift; sourceTree = "<group>"; };
 		497FC8C52C79FF3A00404817 /* FirestoreDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDatabase.swift; sourceTree = "<group>"; };
+		499147772C7C95290055C3ED /* ConversionsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionsScreenView.swift; sourceTree = "<group>"; };
+		499147792C7C953B0055C3ED /* ConversionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionViewModel.swift; sourceTree = "<group>"; };
+		4991477B2C7C95440055C3ED /* ChatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewModel.swift; sourceTree = "<group>"; };
+		4991477E2C7C970E0055C3ED /* FirestoreChatDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreChatDatabase.swift; sourceTree = "<group>"; };
+		499147802C7C97580055C3ED /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		499147822C7C997D0055C3ED /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		499147862C7C9EA50055C3ED /* FirestoreMessagesDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMessagesDatabase.swift; sourceTree = "<group>"; };
+		4991478A2C7CB8EC0055C3ED /* TextMessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageRowView.swift; sourceTree = "<group>"; };
+		4991478C2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageByMeRowView.swift; sourceTree = "<group>"; };
 		49AF20FE2C7A33A500C9F52A /* FirstAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppearModifier.swift; sourceTree = "<group>"; };
 		49C730292C78ACCC0095EB75 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		49C7302B2C78B9F00095EB75 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
@@ -127,8 +147,28 @@
 			children = (
 				497FC8C22C79FEF500404817 /* FireStoreCollections.swift */,
 				497FC8C52C79FF3A00404817 /* FirestoreDatabase.swift */,
+				4991477E2C7C970E0055C3ED /* FirestoreChatDatabase.swift */,
+				499147862C7C9EA50055C3ED /* FirestoreMessagesDatabase.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		4991477D2C7C95490055C3ED /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4991477B2C7C95440055C3ED /* ChatsViewModel.swift */,
+				499147792C7C953B0055C3ED /* ConversionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		499147852C7C99910055C3ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				499147802C7C97580055C3ED /* Chat.swift */,
+				499147822C7C997D0055C3ED /* ChatMessage.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		49C730282C78ACC20095EB75 /* Login */ = {
@@ -223,6 +263,7 @@
 				49E3CB6F2C778DE10074A26D /* Font+Extension.swift */,
 				49E3CB9A2C778FDF0074A26D /* Color+Extension.swift */,
 				49C7303C2C78D9890095EB75 /* Other+Extensions.swift */,
+				490D04AE2C7E4BBE006E2061 /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -286,6 +327,11 @@
 			isa = PBXGroup;
 			children = (
 				49F90CF22C7B4A8600F9779F /* ChatsScreenView.swift */,
+				499147772C7C95290055C3ED /* ConversionsScreenView.swift */,
+				4991478A2C7CB8EC0055C3ED /* TextMessageRowView.swift */,
+				4991478C2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift */,
+				499147852C7C99910055C3ED /* Model */,
+				4991477D2C7C95490055C3ED /* ViewModel */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -409,13 +455,22 @@
 				49C730392C78D1E80095EB75 /* UserProfile.swift in Sources */,
 				49C7302C2C78B9F00095EB75 /* NavigationRouter.swift in Sources */,
 				49F90CF32C7B4A8600F9779F /* ChatsScreenView.swift in Sources */,
+				4991477F2C7C970E0055C3ED /* FirestoreChatDatabase.swift in Sources */,
+				4991478B2C7CB8EC0055C3ED /* TextMessageRowView.swift in Sources */,
 				497FC8C62C79FF3A00404817 /* FirestoreDatabase.swift in Sources */,
 				49E3CB702C778DE10074A26D /* Font+Extension.swift in Sources */,
+				499147872C7C9EA50055C3ED /* FirestoreMessagesDatabase.swift in Sources */,
+				490D04AF2C7E4BBE006E2061 /* Date+Extension.swift in Sources */,
 				49E3CB692C778B1F0074A26D /* View+Extension.swift in Sources */,
+				499147782C7C95290055C3ED /* ConversionsScreenView.swift in Sources */,
 				49E3CB5D2C7773480074A26D /* AppDelegate.swift in Sources */,
+				499147812C7C97580055C3ED /* Chat.swift in Sources */,
 				496FD3C02C78618E008C1264 /* AppButton.swift in Sources */,
+				4991478D2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift in Sources */,
 				49F90CF92C7B645200F9779F /* ProfileViewModel.swift in Sources */,
+				4991477A2C7C953B0055C3ED /* ConversionViewModel.swift in Sources */,
 				49C730322C78C8F90095EB75 /* LoaderView.swift in Sources */,
+				4991477C2C7C95440055C3ED /* ChatsViewModel.swift in Sources */,
 				49F90CF12C7B4A6700F9779F /* HomeScreenView.swift in Sources */,
 				49E3CB672C778AF60074A26D /* PreferenceKeys.swift in Sources */,
 				49C730302C78C8D80095EB75 /* ProgressLoaderModifier.swift in Sources */,
@@ -433,6 +488,7 @@
 				49E3CB6E2C778D290074A26D /* AppTextField.swift in Sources */,
 				4977D19F2C7C74780075F242 /* HomeViewModel.swift in Sources */,
 				49C7303D2C78D9890095EB75 /* Other+Extensions.swift in Sources */,
+				499147832C7C997D0055C3ED /* ChatMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

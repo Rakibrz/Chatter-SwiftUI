@@ -8,5 +8,5 @@
 import Foundation
 
 enum FireStoreCollections: String {
-	case users, chat, messages
+	case users, chats, messages
 }

@@ -11,6 +11,7 @@ class HomeViewModel: ViewModelProtocol {
 	
 	@Published private(set) var users: [UserProfile] = []
 	
+	// Common variables
 	@Published var loading: Bool = false
 	@Published var showError: Bool = false
 	@Published var errorMessage: String = String() {
@@ -22,7 +23,7 @@ class HomeViewModel: ViewModelProtocol {
 		}
 	}
 	
-	private var firestore = FirestoreUserDatabase()
+	private lazy var manager: FirestoreUserDatabase = FirestoreUserDatabase()
 }
 
 @MainActor
@@ -31,7 +32,7 @@ extension HomeViewModel {
 		loading = true
 		defer { loading = false }
 		do {
-			let response = try await firestore.fetchUsers()
+			let response = try await manager.fetchUsers()
 			users = response
 		} catch {
 			errorMessage = error.localizedDescription

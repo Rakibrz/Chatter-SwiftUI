@@ -21,6 +21,7 @@ class LoginViewModel: ViewModelProtocol {
 	@Published var otpText: String = String()
 	@Published var otpSent: Bool = false
 	
+	// Common variables
 	@Published var loading: Bool = false
 	@Published var showError: Bool = false
 	@Published var errorMessage: String = String() {

@@ -81,6 +81,23 @@ extension View {
 		}
 	}
 	
+	func applySectionRowDefaults(background color: Color? = .clear, insets: EdgeInsets = .init()) -> some View {
+		textCase(nil)
+			.listSectionSeparator(.hidden)
+			.listRowBackground(color)
+			.listRowSeparator(.hidden)
+			.listRowInsets(insets)
+			.listItemTint(.accentColor)
+	}
+	
+	func applyListDefaults(rowSpacing: CGFloat = .zero) -> some View {
+		environment(\.defaultMinListHeaderHeight, .zero)
+			.listRowSpacing(rowSpacing)
+			.environment(\.defaultMinListRowHeight, .zero)
+			.scrollContentBackground(.hidden)
+			.scrollBounceBehavior(.basedOnSize)
+	}
+	
 }
 
 // MARK: - Navigation bar

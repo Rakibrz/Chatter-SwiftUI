@@ -19,6 +19,7 @@ enum AppRoutes: Hashable {
 	case authentication
 	case dashboard
 	case profile(isFromLogin: Bool)
+	case messages(chat: Chat)
 	
 	@ViewBuilder
 	func view() -> some View {
@@ -29,6 +30,8 @@ enum AppRoutes: Hashable {
 			TabbarScreenView()
 		case .profile(let isFromLogin):
 			ProfileScreenView(isFromLogin: isFromLogin)
+		case .messages(let chat):
+			ConversionsScreenView(chat: chat)
 		}
 	}
 }

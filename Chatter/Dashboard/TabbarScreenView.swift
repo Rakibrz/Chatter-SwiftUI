@@ -12,7 +12,7 @@ struct TabbarScreenView: View {
 	
 	var body: some View {
 		TabView(selection: $currentTab.animation()) {
-			HomeScreenView()
+			HomeScreenView(currentTab: $currentTab)
 				.tag(TabItem.home)
 			
 			ChatsScreenView()

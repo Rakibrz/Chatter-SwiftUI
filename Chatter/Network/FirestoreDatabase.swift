@@ -5,33 +5,38 @@
 //  Created by Rakib Rz  on 24-08-2024.
 //
 
-import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
 protocol FirestoreProtocol {
+	static var user: User? { get }
 	var collection: FireStoreCollections { get }
 	var database: Firestore { get }
+	
+}
+
+extension FirestoreProtocol {
+	static var user: User? { Auth.auth().currentUser }
+
+	var database: Firestore { Firestore.firestore() }
+	var collectionRef: CollectionReference { database.collection(collection.rawValue) }
 }
 
 class FirestoreUserDatabase: FirestoreProtocol {
-	static var user: User? { Auth.auth().currentUser }
 	
 	static func logout() throws {
 		try Auth.auth().signOut()
 	}
 	
 	var collection: FireStoreCollections { .users }
-	var database: Firestore = Firestore.firestore()
-	
 }
 
+// MARK: - All Users functions
 extension FirestoreUserDatabase {
 	func fetchUsers() async throws -> [UserProfile] {
-		var collection = database.collection(collection.rawValue)
-		var query = collection.order(by: "name")
+		var query = collectionRef.order(by: "name")
 		if let userId = FirestoreUserDatabase.user?.uid {
-			query = collection.whereField(FieldPath.documentID(), isNotEqualTo: userId).order(by: "name")
+			query = collectionRef.whereField(FieldPath.documentID(), isNotEqualTo: userId).order(by: "name")
 		}
 		
 		let querySnapshot = try await query.getDocuments()
@@ -42,6 +47,7 @@ extension FirestoreUserDatabase {
 	}
 }
 
+// MARK: - Specific User's functions
 extension FirestoreUserDatabase {
 	func fetchProfile(by userId: String) async throws -> UserProfile {
 		let reference = documentReference(user: userId)
@@ -51,11 +57,8 @@ extension FirestoreUserDatabase {
 	func update(profile data: UserProfile) async throws {
 		let reference = documentReference(user: data.id ?? String())
 		try reference.setData(from: data)
-//		let auth = Auth.auth()
-//		guard let user = auth.currentUser, data.id == user.uid else { return }
-//		user.displayName = data.name
-//		try await auth.updateCurrentUser(user)
-		let request = Auth.auth().currentUser?.createProfileChangeRequest()
+		guard data.id == Self.user?.uid else { return }
+		let request = Self.user?.createProfileChangeRequest()
 		request?.displayName = data.name
 		try await request?.commitChanges()
 	}
@@ -63,9 +66,8 @@ extension FirestoreUserDatabase {
 
 private extension FirestoreUserDatabase {
 	func documentReference(user documentId: String) -> DocumentReference {
-		let collection = Firestore.firestore().collection(collection.rawValue)
-		return documentId.isNotEmpty
-		? collection.document(documentId)
-		: collection.document()
+		documentId.isNotEmpty
+		? collectionRef.document(documentId)
+		: collectionRef.document()
 	}
 }

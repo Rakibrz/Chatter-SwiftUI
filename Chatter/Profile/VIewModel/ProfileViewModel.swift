@@ -13,6 +13,11 @@ class ProfileViewModel: ViewModelProtocol {
 	@AppStorage(StorageKey.appState.title) static private var appState: AppState?
 
 	@Published var user: UserProfile = UserProfile(id: FirestoreUserDatabase.user?.uid ?? String(), phoneNumber: FirestoreUserDatabase.user?.phoneNumber ?? String(), name: FirestoreUserDatabase.user?.displayName ?? String())
+
+	@Published var showSuccess: Bool = false
+	let profileUpdateMessage: String = String("Profile has been updated successfully.")
+	
+	// Common variables
 	@Published var loading: Bool = false
 	@Published var showError: Bool = false
 	@Published var errorMessage: String = String() {
@@ -24,10 +29,7 @@ class ProfileViewModel: ViewModelProtocol {
 		}
 	}
 
-	@Published var showSuccess: Bool = false
-	let profileUpdateMessage: String = String("Profile has been updated successfully.")
-
-	private var firestore = FirestoreUserDatabase()
+	private lazy var manager: FirestoreUserDatabase = FirestoreUserDatabase()
 }
 
 @MainActor
@@ -39,7 +41,7 @@ extension ProfileViewModel {
 		loading = true
 		do {
 			if let userId = user.id, userId.isNotEmpty {
-				let response = try await firestore.fetchProfile(by: userId)
+				let response = try await manager.fetchProfile(by: userId)
 				user = response
 			}
 		} catch {
@@ -57,7 +59,7 @@ extension ProfileViewModel {
 		defer { loading = false }
 		loading = true
 		do {
-			try await firestore.update(profile: user)
+			try await manager.update(profile: user)
 			showSuccess = true
 		} catch {
 			errorMessage = error.localizedDescription
