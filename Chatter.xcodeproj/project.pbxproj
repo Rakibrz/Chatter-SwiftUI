@@ -20,7 +20,6 @@
 		499147832C7C997D0055C3ED /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499147822C7C997D0055C3ED /* ChatMessage.swift */; };
 		499147872C7C9EA50055C3ED /* FirestoreMessagesDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499147862C7C9EA50055C3ED /* FirestoreMessagesDatabase.swift */; };
 		4991478B2C7CB8EC0055C3ED /* TextMessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991478A2C7CB8EC0055C3ED /* TextMessageRowView.swift */; };
-		4991478D2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991478C2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift */; };
 		49AF20FF2C7A33A500C9F52A /* FirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AF20FE2C7A33A500C9F52A /* FirstAppearModifier.swift */; };
 		49C7302A2C78ACCC0095EB75 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C730292C78ACCC0095EB75 /* LoginViewModel.swift */; };
 		49C7302C2C78B9F00095EB75 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7302B2C78B9F00095EB75 /* NavigationRouter.swift */; };
@@ -77,7 +76,6 @@
 		499147822C7C997D0055C3ED /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		499147862C7C9EA50055C3ED /* FirestoreMessagesDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMessagesDatabase.swift; sourceTree = "<group>"; };
 		4991478A2C7CB8EC0055C3ED /* TextMessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageRowView.swift; sourceTree = "<group>"; };
-		4991478C2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageByMeRowView.swift; sourceTree = "<group>"; };
 		49AF20FE2C7A33A500C9F52A /* FirstAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppearModifier.swift; sourceTree = "<group>"; };
 		49C730292C78ACCC0095EB75 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		49C7302B2C78B9F00095EB75 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
@@ -329,7 +327,6 @@
 				49F90CF22C7B4A8600F9779F /* ChatsScreenView.swift */,
 				499147772C7C95290055C3ED /* ConversionsScreenView.swift */,
 				4991478A2C7CB8EC0055C3ED /* TextMessageRowView.swift */,
-				4991478C2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift */,
 				499147852C7C99910055C3ED /* Model */,
 				4991477D2C7C95490055C3ED /* ViewModel */,
 			);
@@ -466,7 +463,6 @@
 				49E3CB5D2C7773480074A26D /* AppDelegate.swift in Sources */,
 				499147812C7C97580055C3ED /* Chat.swift in Sources */,
 				496FD3C02C78618E008C1264 /* AppButton.swift in Sources */,
-				4991478D2C7CB8FB0055C3ED /* TextMessageByMeRowView.swift in Sources */,
 				49F90CF92C7B645200F9779F /* ProfileViewModel.swift in Sources */,
 				4991477A2C7C953B0055C3ED /* ConversionViewModel.swift in Sources */,
 				49C730322C78C8F90095EB75 /* LoaderView.swift in Sources */,

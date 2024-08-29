@@ -31,7 +31,8 @@ private extension View {
 		.padding(.vertical, AppPadding.small)
 		.foregroundStyle(sendByMe ? Color.theme.lightOrange : Color.theme.orange)
 		.background(sendByMe ? Color.theme.orange : Color.theme.lightOrange)
-		.clipShape(.rect(cornerRadius: Constants.radius * 2))
+		.clipShape(.rect(cornerRadii: .init(topLeading: Constants.radius * 2, bottomLeading: sendByMe ? Constants.radius * 2 : .zero, bottomTrailing: sendByMe ? .zero : Constants.radius * 2, topTrailing: Constants.radius * 2)))
+//		.clipShape(.rect(cornerRadius: Constants.radius * 2))
 		.frame(maxWidth: AppSettingsManager.shared.screenSize.width * 0.8, alignment: sendByMe ? .trailing : .leading)
 		.frame(maxWidth: .infinity, alignment: sendByMe ? .trailing : .leading)
 	}
@@ -40,6 +41,8 @@ private extension View {
 #Preview {
 	VStack {
 		TextMessageRowView(message: .init(text: "This text is by sender"))
+		TextMessageRowView(message: .init(text: "This text is by sender"))
+		TextMessageRowView(message: .init(text: "This text is by sender and I am checking length of the message by adding more pharse here...."))
 		TextMessageRowView(message: .init(text: "This text is by sender and I am checking length of the message by adding more pharse here...."))
 	}
 }

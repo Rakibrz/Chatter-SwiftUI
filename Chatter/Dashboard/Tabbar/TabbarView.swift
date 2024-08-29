@@ -26,15 +26,16 @@ struct TabbarView: View {
 					}
 					.background {
 						if selectedTab == tab {
-							Color.theme.lightOrange
+							Capsule()
+								.fill(Color.theme.lightOrange.gradient)
 								.matchedGeometryEffect(id: "selectedTab", in: tabAnimation)
 						}
 					}
 					.clipShape(.capsule)
 			}
 			.frame(maxWidth: .infinity)
-			.animation(.linear, value: selectedTab)
 		}
+		.animation(.smooth(), value: selectedTab)
 		.padding(AppPadding.small)
 		//		.frame(height: 64)
 		.background(Color.theme.orange)

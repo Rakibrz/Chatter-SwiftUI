@@ -34,13 +34,13 @@ struct ConversionsScreenView: View {
 					} header: {
 						Text(groupped.id, style: .date)
 							.font(.appFont(size: .medium).weight(.semibold))
-							.foregroundStyle(Color.theme.lightGrey)
+							.foregroundStyle(Color.theme.orange)
 							.padding()
 							.frame(maxWidth: .infinity)
 					}
 					.id(groupped.id)
-					.applySectionRowDefaults(insets: .init(top: .zero, leading: AppPadding.small, bottom: .zero, trailing: AppPadding.small))
 				}
+				.applySectionRowDefaults(insets: .init(top: .zero, leading: AppPadding.small, bottom: .zero, trailing: AppPadding.small))
 			}
 			.listStyle(.grouped)
 			.applyListDefaults(rowSpacing: AppPadding.small)
