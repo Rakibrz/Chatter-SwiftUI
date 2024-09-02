@@ -24,7 +24,7 @@ struct TabbarScreenView: View {
 		.hideDefaultNavigation()
 		.safeAreaInset(edge: .bottom, spacing: AppPadding.small) {
 			TabbarView(selectedTab: $currentTab)
-				.padding(.bottom, getSafeArea().bottom.isZero ? AppPadding.regular : .zero)
+				.padding(.bottom, getSafeArea().bottom.isZero ? .none : .zero)
 				.padding(.horizontal, AppPadding.large)
 		}
 		.ignoresSafeArea(.keyboard, edges: .bottom)

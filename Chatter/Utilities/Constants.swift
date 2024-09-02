@@ -23,8 +23,6 @@ enum AppPadding {
 	static let small: CGFloat = 8
 	/// Value: 12
 	static let medium: CGFloat = 12
-	/// Value: 16
-	static let regular: CGFloat = 16
 	/// Value: 24
 	static let large: CGFloat = 24
 }

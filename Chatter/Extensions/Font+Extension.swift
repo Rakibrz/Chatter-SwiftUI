@@ -9,13 +9,13 @@ import SwiftUI
 
 /// Predefined font sizes to use within app
 enum AppFontSize {
-	/// Value: 12
+	/// Caption 2 = 11
 	case small
-	/// Value: 14
+	/// Sub Head = 14
 	case medium
-	/// Value: 16
+	/// Body = 17
 	case regular
-	/// Value: 24
+	/// Title 2 = 22
 	case large
 	/// Any size provided as value
 	case custom(value: CGFloat)
@@ -23,13 +23,13 @@ enum AppFontSize {
 	fileprivate var value: CGFloat {
 		switch self {
 		case .small:
-			return 12
+			return 11
 		case .medium:
 			return 14
 		case .regular:
-			return 16
+			return 17
 		case .large:
-			return 24
+			return 22
 		case .custom(let value):
 			return value
 		}

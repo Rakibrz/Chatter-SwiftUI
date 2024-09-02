@@ -108,7 +108,7 @@ extension View {
 				HStack(spacing: AppPadding.small) {
 					if title.isNotEmpty {
 						Text(title)
-							.font(.appFont(size: .custom(value: 34)).weight(.bold))
+							.font(.appFont(size: .custom(value: 28)).weight(.semibold))
 							.frame(maxWidth: .infinity)
 					}
 				}
@@ -147,7 +147,7 @@ extension View {
 					ToolbarItem(placement: .principal) {
 						Text(title)
 							.foregroundStyle(Color.theme.lightOrange)
-							.font(.appFont(size: .custom(value: 34)).weight(.bold))
+							.font(.appFont(size: .custom(value: 28)).weight(.semibold))
 					}
 				}
 				if (trailing() is EmptyView) == false {

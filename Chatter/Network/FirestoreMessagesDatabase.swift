@@ -29,8 +29,15 @@ class FirestoreMessagesDatabase: FirestoreProtocol {
 }
 
 extension FirestoreMessagesDatabase {
-	func fetchMessages(completion handler: @escaping ValueCallback<Result<[ChatMessage], Error>>) {
-		messageListner = collectionRef.order(by: "date", descending: false).addSnapshotListener(includeMetadataChanges: true) { snapshots, error in
+	func fetchMessages(start from: ChatMessage?, completion handler: @escaping ValueCallback<Result<[ChatMessage], Error>>) {
+		var reference = collectionRef.order(by: "date", descending: false)
+		
+		if let lastDate = from?.date {
+			reference = reference.start(after: [lastDate])
+		}
+//		reference = reference.limit(to: 10)
+		
+		messageListner = reference.addSnapshotListener(includeMetadataChanges: true) { snapshots, error in
 			do {
 				let response: [ChatMessage] = try snapshots?.documentChanges.compactMap({ docDiff in
 					if docDiff.type == .added || docDiff.type == .modified {

@@ -13,8 +13,8 @@ struct LoginScreenView: View {
 	@AppStorage(StorageKey.appState.title) private var appState: AppState?
 	
 	var body: some View {
-		VStack(spacing: AppPadding.regular) {
-			VStack(spacing: AppPadding.regular) {
+		VStack(spacing: AppPadding.small * 2) {
+			VStack(spacing: AppPadding.small * 2) {
 				AppTextField(title: "Phone number", text: $viewModel.phoneNumber, textContentType: .telephoneNumber, keyboardType: .numberPad)
 					.onChange(of: viewModel.phoneNumber) { newValue in
 						viewModel.phoneNumber = String(newValue.prefix(10))

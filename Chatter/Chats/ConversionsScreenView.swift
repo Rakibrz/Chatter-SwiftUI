@@ -11,6 +11,8 @@ struct ConversionsScreenView: View {
 	@Environment(\.dismiss) private var dismiss
 
 	@ObservedObject private var viewModel: ConversionViewModel
+//	@State private var text: String = String("5dkfn sdfj sjfosdpfjpgj3po wjef pojf[psj posdfjioghs sv e gpoergo ejrps fjpsj vpofgjer oghjsp ofjspvj spofgj erpgj spddsj dfpodjgperjsfpsv jdpbojepo sfjpsf  pfjspd fjpsodfj svsdf")
+	
 	@State private var text: String = String()
 	@FocusState private var focused: Bool
 	
@@ -25,25 +27,38 @@ struct ConversionsScreenView: View {
 	var body: some View {
 		ScrollViewReader { proxy in
 			List {
-				ForEach(viewModel.grouppedMessages) { groupped in
+				ForEach(viewModel.grouppedMessages.reversed()) { groupped in
 					Section {
 						ForEach(groupped.messages) { message in
 							TextMessageRowView(message: message)
 								.id(message.id)
+								.onFirstAppear {
+									print("Date: \(message.date.formatted())")
+								}
 						}
+						.transition(.move(edge: .bottom))
+						//						.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
 					} header: {
 						Text(groupped.id, style: .date)
 							.font(.appFont(size: .medium).weight(.semibold))
 							.foregroundStyle(Color.theme.orange)
 							.padding()
 							.frame(maxWidth: .infinity)
+						//							.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+							.scaleEffect(x: 1, y: -1)
 					}
 					.id(groupped.id)
+
+//					.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
 				}
 				.applySectionRowDefaults(insets: .init(top: .zero, leading: AppPadding.small, bottom: .zero, trailing: AppPadding.small))
+//				.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
 			}
 			.listStyle(.grouped)
 			.applyListDefaults(rowSpacing: AppPadding.small)
+			.scaleEffect(x: 1, y: -1)
+
+//			.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
 			.onChange(of: viewModel.grouppedMessages) { newValue in
 				withAnimation {
 					proxy.scrollTo(newValue.last?.messages.last?.id, anchor: .bottom)
@@ -52,12 +67,14 @@ struct ConversionsScreenView: View {
 		}
 		.safeAreaInset(edge: .bottom) {
 			HStack(spacing: AppPadding.small) {
-				TextField(text: $text) {
+				TextField(text: $text, axis: .vertical) {
 					Text("Write message here...")
+//						.font(.appFont().weight(.thin))
 				}
 				.focused($focused)
-				.font(.appFont().weight(.medium))
-				.frame(height: 40)
+				.font(.appFont())
+				.lineLimit(5)
+				.padding(.vertical, AppPadding.small)
 				.onSubmit {
 					sendTextMessage()
 				}
@@ -68,19 +85,15 @@ struct ConversionsScreenView: View {
 					Image(systemName: "paperplane")
 						.imageScale(.large)
 						.scaledToFit()
-						.foregroundStyle(Color.theme.lightOrange)
-						.padding(AppPadding.small)
+						.rotationEffect(.degrees(45))
 				})
-//				.frame(height: 40)
-				.background(Color.theme.orange)
-				.clipShape(.circle)
-				.hide(when: text.isEmpty)
+				.foregroundStyle(Color.theme.orange.opacity(text.isEmpty ?  0.3 : 1.0))
+				.disabled(text.isEmpty)
 			}
 			.font(.appFont().weight(.medium))
-			.padding([.trailing, .vertical], AppPadding.small)
-			.padding(.leading)
+			.padding(.horizontal)
 			.background(Color.theme.lightOrange)
-			.clipShape(.capsule)
+			.clipShape(.rect(cornerRadius:18))
 			.padding()
 			.animation(.easeInOut, value: text.isNotEmpty)
 		}
@@ -88,7 +101,7 @@ struct ConversionsScreenView: View {
 			dismiss()
 		})
 		.onFirstAppear {
-			viewModel.loadConversion()
+			viewModel.loadConversion(last: .none)
 		}
 		.showLoader(when: viewModel.loading)
 		.showAlert(message: viewModel.errorMessage, when: $viewModel.showError) {
@@ -97,7 +110,11 @@ struct ConversionsScreenView: View {
 	}
 }
 
-extension ConversionsScreenView {
+private extension ConversionsScreenView {
+	func loadMore(index: Int) {
+		
+	}
+	
 	func sendTextMessage() {
 		guard text.isNotEmpty else { return }
 		viewModel.send(text: text)

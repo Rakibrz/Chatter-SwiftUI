@@ -47,11 +47,11 @@ extension ConversionViewModel {
 			}
 		}
 	}
-	func loadConversion() {
+	func loadConversion(last: ChatMessage?) {
 		loading = true
 		defer { loading = false }
 		
-		manager.fetchMessages { [weak self] result in
+		manager.fetchMessages(start: last) { [weak self] result in
 			switch result {
 			case .success(let dataList):
 				let dictionary = Dictionary(grouping: dataList) { item -> Date in

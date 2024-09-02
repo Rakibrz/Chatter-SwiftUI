@@ -37,7 +37,6 @@ struct TabbarView: View {
 		}
 		.animation(.smooth(), value: selectedTab)
 		.padding(AppPadding.small)
-		//		.frame(height: 64)
 		.background(Color.theme.orange)
 		.clipShape(.capsule)
 	}

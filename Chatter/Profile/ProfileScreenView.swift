@@ -14,12 +14,19 @@ struct ProfileScreenView: View {
 	var isFromLogin: Bool = false
 	
 	var body: some View {
-		VStack(spacing: AppPadding.regular) {
-			VStack(spacing: AppPadding.regular) {
+		VStack(spacing: AppPadding.small * 2) {
+			VStack(spacing: AppPadding.small * 2) {
 				CircularProfileImageView(urlString: viewModel.user.imageUrl(by: AppSettingsManager.shared.screenSize.width * 0.4, rounded: true), size: .large)
 				
 				AppTextField(title: "Full Name", text: $viewModel.user.name, textContentType: .name)
 					.onChange(of: viewModel.user.name) { newValue in
+						var newValue = newValue
+						let textList = newValue.components(separatedBy: .whitespacesAndNewlines)
+						if textList.count > 2 {
+							let suffix = textList.suffix(textList.count - 2).joined(separator: "")
+							let newList: Array<String> = [textList[0], textList[1] + suffix]
+							newValue = newList.joined(separator: " ")
+						}
 						viewModel.user.name = newValue.capitalized
 					}
 				

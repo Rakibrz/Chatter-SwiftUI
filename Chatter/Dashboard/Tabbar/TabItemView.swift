@@ -40,11 +40,14 @@ struct TabItemView: View {
 					.fontWeight(.semibold)
 			}
 		}
-		.foregroundStyle(isSelected ? Color.black : Color.white)
+		.foregroundStyle(isSelected ? Color.theme.orange : Color.theme.lightOrange)
 		
 	}
 }
 
 #Preview {
-	TabItemView(tab: .inbox, isSelected: true)
+	HStack(spacing: AppPadding.large) {
+		TabItemView(tab: .home, isSelected: false)
+		TabItemView(tab: .inbox, isSelected: true)
+	}
 }

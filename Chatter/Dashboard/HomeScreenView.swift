@@ -48,7 +48,7 @@ struct HomeScreenView: View {
 		}
 		.scrollContentBackground(.hidden)
 		.scrollBounceBehavior(.basedOnSize)
-		.padding(.horizontal, AppPadding.regular)
+		.padding(.horizontal)
 		.appBar(title: "Users", tintColor: Color.theme.orange)
 		.task {
 			await viewModel.getUsers()

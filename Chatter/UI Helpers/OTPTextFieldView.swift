@@ -26,7 +26,7 @@ struct OTPTextFieldView: View {
 					.multilineTextAlignment(.center)
 					.keyboardType(.numberPad)
 					.textContentType(.oneTimeCode)
-					.font(.appFont(size: .large).weight(.bold))
+					.font(.appFont(size: .large).bold())
 					.focused($focus, equals: index)
 					.padding(AppPadding.small)
 					.clipShape(.rect(cornerRadius: Constants.radius))
