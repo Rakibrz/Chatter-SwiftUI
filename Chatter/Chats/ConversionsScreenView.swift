@@ -26,39 +26,42 @@ struct ConversionsScreenView: View {
 	}
 	var body: some View {
 		ScrollViewReader { proxy in
-			List {
-				ForEach(viewModel.grouppedMessages.reversed()) { groupped in
-					Section {
-						ForEach(groupped.messages) { message in
-							TextMessageRowView(message: message)
-								.id(message.id)
-								.onFirstAppear {
-									print("Date: \(message.date.formatted())")
-								}
+			ScrollView {
+				LazyVStack(spacing: .zero, pinnedViews: .sectionFooters) {
+					ForEach(viewModel.grouppedMessages.reversed()) { groupped in
+						Section {
+							ForEach(groupped.messages.reversed()) { message in
+								TextMessageRowView(message: message)
+									.id(message.id)
+									.onFirstAppear {
+										print("Date: \(message.date.formatted())")
+									}
+							}
+							.transition(.move(edge: .bottom))
+						} header: {
+							EmptyView()
+						} footer: {
+							Text(groupped.id, style: .date)
+								.font(.appFont(size: .medium).weight(.semibold))
+								.foregroundStyle(Color.theme.orange)
+								.padding()
+								.frame(maxWidth: .infinity)
 						}
-						.transition(.move(edge: .bottom))
-						//						.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-					} header: {
-						Text(groupped.id, style: .date)
-							.font(.appFont(size: .medium).weight(.semibold))
-							.foregroundStyle(Color.theme.orange)
-							.padding()
-							.frame(maxWidth: .infinity)
-						//							.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
-							.scaleEffect(x: 1, y: -1)
+						.id(groupped.id)
 					}
-					.id(groupped.id)
-
-//					.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+					.applySectionRowDefaults(insets: .init(top: .zero, leading: AppPadding.small, bottom: .zero, trailing: AppPadding.small))
+					.flippedUpsideDown()
 				}
-				.applySectionRowDefaults(insets: .init(top: .zero, leading: AppPadding.small, bottom: .zero, trailing: AppPadding.small))
-//				.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
 			}
 			.listStyle(.grouped)
+			.gesture {
+				DragGesture()
+					.onEnded { _ in
+						
+					}
+			}
 			.applyListDefaults(rowSpacing: AppPadding.small)
-			.scaleEffect(x: 1, y: -1)
-
-//			.rotationEffect(Angle(degrees: 180)).scaleEffect(x: -1.0, y: 1.0, anchor: .center)
+			.flippedUpsideDown()
 			.onChange(of: viewModel.grouppedMessages) { newValue in
 				withAnimation {
 					proxy.scrollTo(newValue.last?.messages.last?.id, anchor: .bottom)
@@ -69,7 +72,6 @@ struct ConversionsScreenView: View {
 			HStack(spacing: AppPadding.small) {
 				TextField(text: $text, axis: .vertical) {
 					Text("Write message here...")
-//						.font(.appFont().weight(.thin))
 				}
 				.focused($focused)
 				.font(.appFont())
@@ -83,7 +85,7 @@ struct ConversionsScreenView: View {
 					sendTextMessage()
 				}, label: {
 					Image(systemName: "paperplane")
-						.imageScale(.large)
+//						.imageScale(.large)
 						.scaledToFit()
 						.rotationEffect(.degrees(45))
 				})
@@ -127,4 +129,18 @@ private extension ConversionsScreenView {
 #Preview {
 	ConversionsScreenView(chat: Chat(id: "JVr7rKEb5I6vSkvJDLJP", createdBy: "", users: []))
 		.applyDefaults()
+}
+
+struct FlippedUpsideDown: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.rotationEffect(.radians(.pi))
+			.scaleEffect(x: -1, y: 1, anchor: .center)
+	}
+}
+
+extension View {
+	func flippedUpsideDown() -> some View {
+		self.modifier(FlippedUpsideDown())
+	}
 }

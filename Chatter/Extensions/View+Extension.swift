@@ -157,6 +157,7 @@ extension View {
 				}
 				
 			}
+			.toolbarBackground(Color.theme.orange, for: .navigationBar)
 			.toolbarBackground(.visible, for: .navigationBar)
 			.toolbar(.visible, for: .navigationBar)
 			.toolbarRole(.navigationStack)
